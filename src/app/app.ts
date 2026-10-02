@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { initFlowbite } from 'flowbite';
 
 @Component({
   imports: [RouterOutlet],
@@ -7,6 +8,11 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css',
   templateUrl: './app.html',
 })
-export class App {
+export class App implements OnInit {
+
   protected readonly title = signal('segundoparcialAngular');
+
+  ngOnInit(): void {
+    initFlowbite();
+  }
 }
