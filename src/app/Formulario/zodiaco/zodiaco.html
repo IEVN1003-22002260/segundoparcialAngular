@@ -1,0 +1,42 @@
+<p>zodiaco works!</p>
+
+<div class="tarjeta">
+  <h2>Datos Personales</h2>
+
+  <label>Nombre:</label>
+  <input type="text" [(ngModel)]="nombrePersona">
+  <br><br>
+
+  <label>Apaterno:</label>
+  <input type="text" [(ngModel)]="apellidoPat">
+  <br><br>
+
+  <label>Amaterno:</label>
+  <input type="text" [(ngModel)]="apellidoMat">
+  <br><br>
+
+  <label>Día:</label>
+  <input type="number" [(ngModel)]="diaNac">
+
+  <label>Mes:</label>
+  <input type="number" [(ngModel)]="mesNac">
+
+  <label>Año:</label>
+  <input type="number" [(ngModel)]="anioNac">
+  <br><br>
+
+  <label>Sexo:</label>
+  <input type="radio" name="genero" value="Masculino" [(ngModel)]="genero"> Masculino
+  <input type="radio" name="genero" value="Femenino" [(ngModel)]="genero"> Femenino
+  <br><br>
+</div>
+
+<button (click)="mostrarDatos()">Imprimir</button>
+
+<br><br>
+
+<h3>Resultado</h3>
+<p>Hola {{nombreMostrado}} {{patMostrado}} {{matMostrado}}</p>
+<p>Tienes: {{edadActual}} años</p>
+<p>Tu Signo zodiacal chino es: {{animalChino}}</p>
+<img [src]="fotoAnimal" width="100">
