@@ -33,6 +33,13 @@ export const routes: Routes = [
                         (c)=>c.ListaEscuela
                     ),
                 },
+                {
+                path:'cinepolis',
+                loadComponent:()=>
+                    import('./escuela/cinepolis/cinepolis').then(
+                        (c)=>c.Cinepolis
+                    ),
+                },
         ],
     },
     { path: '', redirectTo: 'admin', pathMatch: 'full' },
