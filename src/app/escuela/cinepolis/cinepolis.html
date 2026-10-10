@@ -1,1 +1,89 @@
-<p>cinepolis works!</p>
+<br>
+<br>
+<br>
+<div class="bg-center min-h-screen bg-no-repeat bg-[url('https://tse3.mm.bing.net/th/id/OIP.TQo0luEPYpRacDlcYN3CZgHaEJ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3')] bg-cover bg-dark bg-blend-multiply p-6">
+
+  <div class="max-w-4xl mx-auto">
+
+  
+    <div class="flex justify-center mb-8">
+      <h1 class="bg-gray-100 text-gray-900 text-4xl font-bold italic px-4 py-1 border border-gray-300 rounded-lg">Cinepolis</h1>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-2 gap-6 items-start">
+
+     
+      <div class="md:col-span-2">
+        <form [formGroup]="formulario">
+          <fieldset class="border-4 border-white/90 rounded-lg p-5">
+            <legend class="px-2 text-2xl font-bold italic text-white">Entradas</legend>
+
+            <div class="mb-5">
+              <div class="flex items-center gap-4">
+                <label for="nombre" class="w-48 shrink-0 text-sm font-medium text-white">Nombre</label>
+                <input type="text" id="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" formControlName="nombre" placeholder="Nombre" required />
+              </div>
+            </div>
+
+            <div class="mb-5">
+              <div class="flex items-center gap-4">
+                <label for="cantidadCompradores" class="w-48 shrink-0 text-sm font-medium text-white">Cantidad Compradores</label>
+                <input type="number" id="cantidadCompradores" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" formControlName="cantidadCompradores" placeholder="Cantidad" required />
+              </div>
+            </div>
+
+            <fieldset class="mb-5">
+              <div class="flex items-center gap-4">
+                <legend class="sr-only">Tarjeta Cineco</legend>
+                <label for="tarjeta" class="w-48 shrink-0 text-sm font-medium text-white">Tarjeta Cineco</label>
+
+                <div class="flex items-center">
+                  <input id="country-option-1" type="radio" name="tarjetacineco" formControlName="tarjetacineco" value="Si" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-2 focus:ring-blue-500" checked>
+                  <label for="country-option-1" class="select-none ms-2 text-sm font-medium text-white">Si</label>
+                </div>
+
+                <div class="flex items-center">
+                  <input id="country-option-2" type="radio" name="tarjetacineco" formControlName="tarjetacineco" value="No" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-2 focus:ring-blue-500">
+                  <label for="country-option-2" class="select-none ms-2 text-sm font-medium text-white">No</label>
+                </div>
+              </div>
+            </fieldset>
+
+            <div>
+              <div class="flex items-center gap-4">
+                <label for="cantidadBoletos" class="w-48 shrink-0 text-sm font-medium text-white">Cantidad de Boletos</label>
+                <input type="number" id="cantidadBoletos" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" formControlName="cantidadBoletos" placeholder="Cantidad de Boletos" required />
+              </div>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+
+
+      <fieldset class="border-4 border-white/90 rounded-lg p-5 text-white">
+        <legend class="px-2 text-2xl font-bold italic">Salidas</legend>
+
+        @if (total > 0) {
+          <div class="bg-gray-100 text-gray-900 rounded-lg p-3 text-sm space-y-1">
+            <p>Nombre: {{ nuevaCompra.nombre }}</p>
+            <p>Cantidad de boletos comprados: {{ nuevaCompra.cantidadBoletos }}</p>
+            <p class="font-bold">Total a pagar: ${{ total }}</p>
+          </div>
+        }
+
+        @if (mensaje) {
+          <p class="mt-3 p-3 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">{{ mensaje }}</p>
+        }
+      </fieldset>
+    </div>
+
+    <fieldset class="max-w-xs mx-auto mt-40 border-4 border-white/90 rounded-lg p-5">
+      <legend class="px-2 text-2xl font-bold italic text-white">Acciones</legend>
+      <div class="flex justify-center gap-4">
+        <button type="button" class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none" (click)="muestraResultado()">Procesar</button>
+        <button type="button" class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none" (click)="salir()">Salir</button>
+      </div>
+    </fieldset>
+
+  </div>
+</div>
