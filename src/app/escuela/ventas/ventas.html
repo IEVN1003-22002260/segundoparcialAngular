@@ -1,0 +1,145 @@
+<br>
+<br>
+<br>
+
+<div class="bg-center min-h-screen bg-no-repeat bg-[url('https://tse3.mm.bing.net/th/id/OIP.TQo0luEPYpRacDlcYN3CZgHaEJ?r=0&rs=1&pid=ImgDetMain&o=7&rm=3')] bg-cover bg-dark bg-blend-multiply p-6">
+
+  <div class="max-w-4xl mx-auto">
+
+    <div class="flex justify-center mb-8">
+      <h1 class="bg-gray-100 text-gray-900 text-4xl font-bold italic px-4 py-1 border border-gray-300 rounded-lg">Cinepolis</h1>
+    </div>
+
+    <fieldset class="border-4 border-white/90 rounded-lg p-5">
+      <legend class="px-2 text-2xl font-bold italic text-white">Lista de ventas</legend>
+
+      <div class="relative overflow-x-auto rounded-lg">
+        <table class="w-full text-sm text-left text-gray-900">
+
+          <thead class="text-xs text-gray-900 uppercase bg-gray-100">
+            <tr>
+              <th scope="col" class="px-6 py-3">Nombre</th>
+              <th scope="col" class="px-6 py-3">Cantidad Compradores</th>
+              <th scope="col" class="px-6 py-3">Utilizó Tarjeta Cineco</th>
+              <th scope="col" class="px-6 py-3">Cantidad de boletos</th>
+              <th scope="col" class="px-6 py-3">Total pagado</th>
+
+              <th scope="col" class="px-6 py-3">Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let cliente1 of clientes; let i = index"
+              class="border-b border-gray-300 hover:bg-gray-200"
+              [ngClass]="i === indiceEditando ? 'bg-yellow-100' : 'bg-gray-50'">
+
+              <td class="px-6 py-4 font-medium whitespace-nowrap">{{ cliente1.nombre }}</td>
+              <td class="px-6 py-4">{{ cliente1.cantidadCompradores }}</td>
+              <td class="px-6 py-4">{{ cliente1.tarjetacineco }}</td>
+              <td class="px-6 py-4">{{ cliente1.cantidadBoletos }}</td>
+              <td class="px-6 py-4 font-bold">${{ cliente1.total }}</td>
+
+              <td class="px-6 py-4">
+                <div class="flex gap-2">
+                  <button
+                    type="button"
+                    class="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300"
+                    (click)="editar(i)">
+                    Editar
+                  </button>
+
+                  <button
+                    type="button"
+                    class="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300"
+                    (click)="eliminar(i)">
+                    Eliminar
+                  </button>
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+      <div *ngIf="clientes.length === 0"
+        class="p-3 mt-4 text-sm text-yellow-800 rounded-lg bg-yellow-50"
+        role="alert">
+        <span class="font-medium">Información:</span>
+        No hay clientes registrados.
+      </div>
+    </fieldset>
+
+    <form *ngIf="indiceEditando !== null" [formGroup]="formulario" class="mt-8">
+      <fieldset class="border-4 border-white/90 rounded-lg p-5">
+        <legend class="px-2 text-2xl font-bold italic text-white">Editar venta</legend>
+
+        <div class="mb-5">
+          <div class="flex items-center gap-4">
+            <label for="editNombre" class="w-48 shrink-0 text-sm font-medium text-white">Nombre</label>
+            <input type="text" id="editNombre" formControlName="nombre" placeholder="Nombre"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" />
+          </div>
+        </div>
+
+        <div class="mb-5">
+          <div class="flex items-center gap-4">
+            <label for="editCompradores" class="w-48 shrink-0 text-sm font-medium text-white">Cantidad Compradores</label>
+            <input type="number" id="editCompradores" formControlName="cantidadCompradores" placeholder="Cantidad"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" />
+          </div>
+        </div>
+
+        <fieldset class="mb-5">
+          <div class="flex items-center gap-4">
+            <legend class="sr-only">Tarjeta Cineco</legend>
+            <span class="w-48 shrink-0 text-sm font-medium text-white">Tarjeta Cineco</span>
+
+            <div class="flex items-center">
+              <input id="editar-si" type="radio" formControlName="tarjetacineco" value="Si"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-2 focus:ring-blue-500">
+              <label for="editar-si" class="select-none ms-2 text-sm font-medium text-white">Si</label>
+            </div>
+
+            <div class="flex items-center">
+              <input id="editar-no" type="radio" formControlName="tarjetacineco" value="No"
+                class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-2 focus:ring-blue-500">
+              <label for="editar-no" class="select-none ms-2 text-sm font-medium text-white">No</label>
+            </div>
+          </div>
+        </fieldset>
+
+        <div class="mb-5">
+          <div class="flex items-center gap-4">
+            <label for="editBoletos" class="w-48 shrink-0 text-sm font-medium text-white">Cantidad de Boletos</label>
+            <input type="number" id="editBoletos" formControlName="cantidadBoletos" placeholder="Cantidad de Boletos"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" />
+          </div>
+        </div>
+
+        <p *ngIf="mensaje" class="mb-4 p-3 text-sm text-yellow-800 rounded-lg bg-yellow-50" role="alert">{{ mensaje }}</p>
+
+        <div class="flex justify-center gap-4">
+          <button type="button"
+            class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
+            (click)="guardar()">
+            Guardar cambios
+          </button>
+        </div>
+      </fieldset>
+    </form>
+
+    <fieldset class="max-w-xs mx-auto mt-8 border-4 border-white/90 rounded-lg p-5">
+      <legend class="px-2 text-2xl font-bold italic text-white">Acciones</legend>
+      <div class="flex justify-center">
+        <button type="button"
+          class="text-gray-900 bg-gray-100 hover:bg-gray-200 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none"
+          (click)="volver()">
+          Volver
+        </button>
+      </div>
+    </fieldset>
+
+  </div>
+</div>

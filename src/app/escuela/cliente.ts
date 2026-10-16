@@ -3,4 +3,5 @@ export interface ICliente {
     cantidadCompradores:string,
     tarjetacineco:string,
     cantidadBoletos:string
+    total?: number;
 }

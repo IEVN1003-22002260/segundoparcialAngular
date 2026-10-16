@@ -13,6 +13,7 @@ import {IAlumno} from '../alumno';
 export class ListaEscuela {
 formulario!:FormGroup
 alumnos:IAlumno[]=[]
+indiceEdicion:number=-1
 
 nuevoAlumno:IAlumno={
   matricula: '',
@@ -41,13 +42,21 @@ nuevoAlumno:IAlumno={
       alert('Todos los campos son obligatorios');
       return;
     }
+    if(this.indiceEdicion !== -1){
+      this.alumnos[this.indiceEdicion]={
+        ...this.nuevoAlumno
+      }
+    }else{
+      this.alumnos.push({...this.nuevoAlumno})//las llaves son porque es un objeto
+    }
     //... se llama sprit
-    this.alumnos.push({...this.nuevoAlumno}) //las llaves son porque es un objeto
+     //las llaves son porque es un objeto
 
     localStorage.setItem(//local storage es un almacenamiento temporal en el navegador del usuario
       'alumnos',//nombre de la variable tipo local storage
       JSON.stringify(this.alumnos)
     )
+    this.limpiarCampos()
   }
   //llave propiedad y valor
 //al arreglo se le agrega un objeto
@@ -66,5 +75,45 @@ nuevoAlumno:IAlumno={
     if (datos){
       this.alumnos = JSON.parse(datos);
     }
+  }
+
+  editarAlumnos(index:number):void{
+    this.nuevoAlumno={
+      ...this.alumnos[index]
+    }
+
+    const alumno=this.alumnos[index]
+    this.formulario.patchValue({
+      matricula: alumno.matricula,
+      nombre:alumno.nombre,
+      correo:alumno.correo,
+      materia:alumno.materia
+
+    })
+    this.indiceEdicion=index
+  }
+
+  eliminarAlumno(index: number):void{
+    this.alumnos.splice(index,1)
+    localStorage.setItem(
+      'alumnos',
+      JSON.stringify(this.alumnos)
+    )
+  }
+
+  limpiarCampos():void{
+    this.nuevoAlumno = {
+      matricula: '',
+      nombre: '',
+      correo: '',
+      materia: ''
+    }
+    this.formulario.patchValue({
+      matricula: this.nuevoAlumno.matricula,
+      nombre: this.nuevoAlumno.nombre,
+      correo: this.nuevoAlumno.correo,
+      materia: this.nuevoAlumno.materia
+    })
+    this.indiceEdicion=1
   }
 }
