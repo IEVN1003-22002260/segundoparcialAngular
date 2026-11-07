@@ -18,7 +18,7 @@ export class Alumnos implements OnInit {
 
 listFilter:string=''
 alumnoTitle!:string
-dataSource:AlumnosUtl[]=[];
+dataSource:any=[];
 /*datasource es un arreglo*/
 
 constructor(public alumnosUtl:ProyectoapiService, private router: Router){}
@@ -36,6 +36,9 @@ alumnosIric:AlumnosUtl[]=[
 ngOnInit():void{
   this.cargarAlumnos();
 }
+
+muestraImagen: boolean = false;
+showImage(): void { this.muestraImagen = !this.muestraImagen; }
 
 cargarAlumnos():void{
   this.alumnosUtl.getAlumnos().subscribe({
@@ -55,4 +58,16 @@ cargarAlumnos():void{
 
     });
   }
+
+  agregarNuevoAlumno(): void {
+  this.router.navigate(['/utl/agregar']);
+}
+
+editarAlumno(mat: number): void {
+  this.router.navigate(['/utl/editar', mat]);
+}
+
+eliminarAlumno(mat: number): void {
+  this.router.navigate(['/utl/eliminar', mat]);
+}
 }

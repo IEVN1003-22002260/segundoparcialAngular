@@ -13,13 +13,26 @@ export class ProyectoapiService{
 public getAlumnos():Observable<AlumnosUtl[]>{
     /*el observable espera por la informacion para contruir un arreglo*/
     return this.http.get<AlumnosUtl[]>
-    ('http://127.0.0.1:5000/api/alumnos')
+    ('http://127.0.0.1:5000/api/alumnos/')
     }
 
-    /* public getAlumnos2(): Observable<RespuestaAlumnos>{</RespuestaAlumnos>
-} */
+agregarNuevoAlumno(datos:any){
+  return this.http.post('http://127.0.0.1:5000/api/alumnos/',
+    datos)
+}
+ 
+public getAlumno(mat:string):Observable<any>{
+  console.log("matricula"+ mat)
+  return this.http.get<any>(`http://127.0.0.1:5000/api/alumnos/${mat}`)
+}
+ 
+modificarAlumno(mat:number,datos:AlumnosUtl){
+  return this.http.put('http://127.0.0.1:5000/api/alumnos/'+mat,datos)
+}
+ 
+public EliminaAlumno(mat:number):Observable<AlumnosUtl>{
+  return this.http.delete<AlumnosUtl>('http://127.0.0.1:5000/api/alumnos/'+mat)
+}
 
-AgregarNuevoAlumno(datos:AlumnosUtl){
-    return this.http.post('http://127.0.0.1:5000/alumnos', datos)
-    }
+
 }
